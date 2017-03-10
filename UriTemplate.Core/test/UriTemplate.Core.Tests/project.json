@@ -1,0 +1,28 @@
+﻿{
+  "version": "1.0.0-*",
+
+  "dependencies": {
+    "dotnet-test-nunit": "3.4.0-beta-3",
+    "dotnet-test-nunit-teamcity": "3.4.0-beta-3",
+    "UriTemplate.Core": "1.0.0-*",
+    "Microsoft.AspNetCore.TestHost": "1.0.0",
+    "Microsoft.NETCore.TestHost": "1.1.0",
+    "NETStandard.Library": "1.6.1",
+    "Moq": "4.6.38-alpha",
+    "NUnit": "3.6.0",
+    "Shouldly": "2.8.2"
+  },
+
+  "testRunner": "nunit-teamcity",
+  "frameworks": {
+    "netcoreapp1.0": {
+      "imports": [
+        "dotnet5.6",
+        "win7-x64"
+      ]
+    }
+  },
+  "runtimes": {
+    "win7-x64": {}
+  }
+}
