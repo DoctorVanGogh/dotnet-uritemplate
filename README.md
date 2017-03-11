@@ -10,7 +10,7 @@ var binding = uriTemplate.BindByName(variables);
 Console.WriteLine(binding); //prints www.campio.io/dolor/42
 ```
 
-There are also more complex supported that can be used for matching higher level templates:
+There are also more complex templates supported:
 ```
 var variables = new Dictionary<string, object>
 {
