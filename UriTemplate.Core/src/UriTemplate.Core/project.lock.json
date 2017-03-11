@@ -2,8 +2,8 @@
   "locked": false,
   "version": 2,
   "targets": {
-    ".NETFramework,Version=v4.6.1": {},
-    ".NETFramework,Version=v4.6.1/win7-x64": {},
+    ".NETFramework,Version=v4.5": {},
+    ".NETFramework,Version=v4.5/win7-x64": {},
     ".NETStandard,Version=v1.6": {
       "Microsoft.NETCore.Platforms/1.1.0": {
         "type": "package",
@@ -6570,7 +6570,7 @@
   },
   "projectFileDependencyGroups": {
     "": [],
-    ".NETFramework,Version=v4.6.1": [],
+    ".NETFramework,Version=v4.5": [],
     ".NETStandard,Version=v1.6": [
       "NETStandard.Library >= 1.6.1"
     ]

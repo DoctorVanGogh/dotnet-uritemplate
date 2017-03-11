@@ -1,11 +1,11 @@
 ﻿// Copyright (c) Tunnel Vision Laboratories, LLC. All Rights Reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
-namespace TunnelVisionLabs.Net
-{
-    using System;
-    using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
 
+namespace UriTemplate.Core
+{
     /// <summary>
     /// A class that represents the results of a match operation on a <see cref="UriTemplate"/> instance.
     /// </summary>

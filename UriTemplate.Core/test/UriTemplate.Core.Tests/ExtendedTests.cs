@@ -1,13 +1,12 @@
 ﻿// Copyright (c) Tunnel Vision Laboratories, LLC. All Rights Reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
+using System;
+using System.Collections.Generic;
 using NUnit.Framework;
 
-namespace Testing.Rfc6570
+namespace UriTemplate.Core.Tests
 {
-    using System;
-    using System.Collections.Generic;
-    using TunnelVisionLabs.Net;
     using ICollection = System.Collections.ICollection;
 
     [TestFixture]
@@ -129,7 +128,7 @@ namespace Testing.Rfc6570
         public void TestCompoundPathSegmentExpansion()
         {
             string template = "{/id*}";
-            UriTemplate uriTemplate = new UriTemplate(template);
+            global::UriTemplate.Core.UriTemplate uriTemplate = new global::UriTemplate.Core.UriTemplate(template);
             Uri uri = uriTemplate.BindByName(Variables1);
             Assert.AreEqual("/person", uri.OriginalString);
 
@@ -149,7 +148,7 @@ namespace Testing.Rfc6570
         public void TestCompoundPathSegmentExpansionWithQueryString()
         {
             string template = "{/id*}{?fields,first_name,last.name,token}";
-            UriTemplate uriTemplate = new UriTemplate(template);
+            global::UriTemplate.Core.UriTemplate uriTemplate = new global::UriTemplate.Core.UriTemplate(template);
             Uri uri = uriTemplate.BindByName(Variables1);
             string[] allowed =
                 {
@@ -187,7 +186,7 @@ namespace Testing.Rfc6570
         public void TestSimpleExpansionWithQueryString()
         {
             string template = "/search.{format}{?q,geocode,lang,locale,page,result_type}";
-            UriTemplate uriTemplate = new UriTemplate(template);
+            global::UriTemplate.Core.UriTemplate uriTemplate = new global::UriTemplate.Core.UriTemplate(template);
             Uri uri = uriTemplate.BindByName(Variables1);
             string[] allowed =
                 {
@@ -224,7 +223,7 @@ namespace Testing.Rfc6570
         public void TestPathSegmentExpansionWithEncodedCharacters()
         {
             string template = "/test{/Some%20Thing}";
-            UriTemplate uriTemplate = new UriTemplate(template);
+            global::UriTemplate.Core.UriTemplate uriTemplate = new global::UriTemplate.Core.UriTemplate(template);
             Uri uri = uriTemplate.BindByName(Variables1);
             Assert.AreEqual("/test/foo", uri.OriginalString);
 
@@ -243,7 +242,7 @@ namespace Testing.Rfc6570
         public void TestQueryExpansionWithIntegerVariable()
         {
             string template = "/set{?number}";
-            UriTemplate uriTemplate = new UriTemplate(template);
+            global::UriTemplate.Core.UriTemplate uriTemplate = new global::UriTemplate.Core.UriTemplate(template);
             Uri uri = uriTemplate.BindByName(Variables1);
             Assert.AreEqual("/set?number=6", uri.OriginalString);
 
@@ -265,7 +264,7 @@ namespace Testing.Rfc6570
         public void TestEscapeSequences1()
         {
             string template = "/base{/group_id,first_name}/pages{/page,lang}{?format,q}";
-            UriTemplate uriTemplate = new UriTemplate(template);
+            global::UriTemplate.Core.UriTemplate uriTemplate = new global::UriTemplate.Core.UriTemplate(template);
             Uri uri = uriTemplate.BindByName(Variables1);
             Assert.AreEqual("/base/12345/John/pages/5/en?format=json&q=URI%20Templates", uri.OriginalString);
 
@@ -294,7 +293,7 @@ namespace Testing.Rfc6570
         public void TestEscapeSequences2()
         {
             string template = "/sparql{?query}";
-            UriTemplate uriTemplate = new UriTemplate(template);
+            global::UriTemplate.Core.UriTemplate uriTemplate = new global::UriTemplate.Core.UriTemplate(template);
             Uri uri = uriTemplate.BindByName(Variables1);
             Assert.AreEqual("/sparql?query=PREFIX%20dc%3A%20%3Chttp%3A%2F%2Fpurl.org%2Fdc%2Felements%2F1.1%2F%3E%20SELECT%20%3Fbook%20%3Fwho%20WHERE%20%7B%20%3Fbook%20dc%3Acreator%20%3Fwho%20%7D", uri.OriginalString);
 
@@ -313,7 +312,7 @@ namespace Testing.Rfc6570
         public void TestEscapeSequences3()
         {
             string template = "/go{?uri}";
-            UriTemplate uriTemplate = new UriTemplate(template);
+            global::UriTemplate.Core.UriTemplate uriTemplate = new global::UriTemplate.Core.UriTemplate(template);
             Uri uri = uriTemplate.BindByName(Variables1);
             Assert.AreEqual("/go?uri=http%3A%2F%2Fexample.org%2F%3Furi%3Dhttp%253A%252F%252Fexample.org%252F", uri.OriginalString);
 
@@ -332,7 +331,7 @@ namespace Testing.Rfc6570
         public void TestEscapeSequences4()
         {
             string template = "/service{?word}";
-            UriTemplate uriTemplate = new UriTemplate(template);
+            global::UriTemplate.Core.UriTemplate uriTemplate = new global::UriTemplate.Core.UriTemplate(template);
             Uri uri = uriTemplate.BindByName(Variables1);
             Assert.AreEqual("/service?word=dr%C3%BCcken", uri.OriginalString);
 
@@ -351,7 +350,7 @@ namespace Testing.Rfc6570
         public void TestEscapeSequences5()
         {
             string template = "/lookup{?Stra%C3%9Fe}";
-            UriTemplate uriTemplate = new UriTemplate(template);
+            global::UriTemplate.Core.UriTemplate uriTemplate = new global::UriTemplate.Core.UriTemplate(template);
             Uri uri = uriTemplate.BindByName(Variables1);
             Assert.AreEqual("/lookup?Stra%C3%9Fe=Gr%C3%BCner%20Weg", uri.OriginalString);
 
@@ -370,7 +369,7 @@ namespace Testing.Rfc6570
         public void TestEscapeSequences6()
         {
             string template = "{random}";
-            UriTemplate uriTemplate = new UriTemplate(template);
+            global::UriTemplate.Core.UriTemplate uriTemplate = new global::UriTemplate.Core.UriTemplate(template);
             Uri uri = uriTemplate.BindByName(Variables1);
             Assert.AreEqual("%C5%A1%C3%B6%C3%A4%C5%B8%C5%93%C3%B1%C3%AA%E2%82%AC%C2%A3%C2%A5%E2%80%A1%C3%91%C3%92%C3%93%C3%94%C3%95%C3%96%C3%97%C3%98%C3%99%C3%9A%C3%A0%C3%A1%C3%A2%C3%A3%C3%A4%C3%A5%C3%A6%C3%A7%C3%BF", uri.OriginalString);
 
@@ -389,7 +388,7 @@ namespace Testing.Rfc6570
         public void TestEscapeSequences7()
         {
             string template = "{?assoc_special_chars*}";
-            UriTemplate uriTemplate = new UriTemplate(template);
+            global::UriTemplate.Core.UriTemplate uriTemplate = new global::UriTemplate.Core.UriTemplate(template);
             Uri uri = uriTemplate.BindByName(Variables1);
             Assert.AreEqual("?%C5%A1%C3%B6%C3%A4%C5%B8%C5%93%C3%B1%C3%AA%E2%82%AC%C2%A3%C2%A5%E2%80%A1%C3%91%C3%92%C3%93%C3%94%C3%95=%C3%96%C3%97%C3%98%C3%99%C3%9A%C3%A0%C3%A1%C3%A2%C3%A3%C3%A4%C3%A5%C3%A6%C3%A7%C3%BF", uri.OriginalString);
 
@@ -408,7 +407,7 @@ namespace Testing.Rfc6570
         public void TestCompoundPathSegmentExpansionCollectionVariable()
         {
             string template = "{/id*}";
-            UriTemplate uriTemplate = new UriTemplate(template);
+            global::UriTemplate.Core.UriTemplate uriTemplate = new global::UriTemplate.Core.UriTemplate(template);
             Uri uri = uriTemplate.BindByName(Variables2);
             string[] allowed =
                 {
@@ -434,7 +433,7 @@ namespace Testing.Rfc6570
         public void TestCompoundPathSegmentExpansionWithQueryStringCollectionVariable()
         {
             string template = "{/id*}{?fields,token}";
-            UriTemplate uriTemplate = new UriTemplate(template);
+            global::UriTemplate.Core.UriTemplate uriTemplate = new global::UriTemplate.Core.UriTemplate(template);
             Uri uri = uriTemplate.BindByName(Variables2);
             string[] allowed =
                 {
@@ -473,7 +472,7 @@ namespace Testing.Rfc6570
         public void TestPathSegmentExpansionEmptyList()
         {
             string template = "{/empty_list}";
-            UriTemplate uriTemplate = new UriTemplate(template);
+            global::UriTemplate.Core.UriTemplate uriTemplate = new global::UriTemplate.Core.UriTemplate(template);
             Uri uri = uriTemplate.BindByName(Variables3);
             Assert.AreEqual(string.Empty, uri.OriginalString);
 
@@ -492,7 +491,7 @@ namespace Testing.Rfc6570
         public void TestCompoundPathSegmentExpansionEmptyList()
         {
             string template = "{/empty_list*}";
-            UriTemplate uriTemplate = new UriTemplate(template);
+            global::UriTemplate.Core.UriTemplate uriTemplate = new global::UriTemplate.Core.UriTemplate(template);
             Uri uri = uriTemplate.BindByName(Variables3);
             Assert.AreEqual(string.Empty, uri.OriginalString);
 
@@ -511,7 +510,7 @@ namespace Testing.Rfc6570
         public void TestQueryExpansionEmptyList()
         {
             string template = "{?empty_list}";
-            UriTemplate uriTemplate = new UriTemplate(template);
+            global::UriTemplate.Core.UriTemplate uriTemplate = new global::UriTemplate.Core.UriTemplate(template);
             Uri uri = uriTemplate.BindByName(Variables3);
             Assert.AreEqual(string.Empty, uri.OriginalString);
 
@@ -530,7 +529,7 @@ namespace Testing.Rfc6570
         public void TestCompoundQueryExpansionEmptyList()
         {
             string template = "{?empty_list*}";
-            UriTemplate uriTemplate = new UriTemplate(template);
+            global::UriTemplate.Core.UriTemplate uriTemplate = new global::UriTemplate.Core.UriTemplate(template);
             Uri uri = uriTemplate.BindByName(Variables3);
             Assert.AreEqual(string.Empty, uri.OriginalString);
 
@@ -549,7 +548,7 @@ namespace Testing.Rfc6570
         public void TestQueryExpansionEmptyMap()
         {
             string template = "{?empty_assoc}";
-            UriTemplate uriTemplate = new UriTemplate(template);
+            global::UriTemplate.Core.UriTemplate uriTemplate = new global::UriTemplate.Core.UriTemplate(template);
             Uri uri = uriTemplate.BindByName(Variables3);
             Assert.AreEqual(string.Empty, uri.OriginalString);
 
@@ -568,7 +567,7 @@ namespace Testing.Rfc6570
         public void TestCompoundQueryExpansionEmptyMap()
         {
             string template = "{?empty_assoc*}";
-            UriTemplate uriTemplate = new UriTemplate(template);
+            global::UriTemplate.Core.UriTemplate uriTemplate = new global::UriTemplate.Core.UriTemplate(template);
             Uri uri = uriTemplate.BindByName(Variables3);
             Assert.AreEqual(string.Empty, uri.OriginalString);
 
@@ -587,7 +586,7 @@ namespace Testing.Rfc6570
         public void TestSimpleExpansionNumericKey()
         {
             string template = "{42}";
-            UriTemplate uriTemplate = new UriTemplate(template);
+            global::UriTemplate.Core.UriTemplate uriTemplate = new global::UriTemplate.Core.UriTemplate(template);
             Uri uri = uriTemplate.BindByName(Variables4);
             Assert.AreEqual("The%20Answer%20to%20the%20Ultimate%20Question%20of%20Life%2C%20the%20Universe%2C%20and%20Everything", uri.OriginalString);
 
@@ -606,7 +605,7 @@ namespace Testing.Rfc6570
         public void TestQueryExpansionNumericKey()
         {
             string template = "{?42}";
-            UriTemplate uriTemplate = new UriTemplate(template);
+            global::UriTemplate.Core.UriTemplate uriTemplate = new global::UriTemplate.Core.UriTemplate(template);
             Uri uri = uriTemplate.BindByName(Variables4);
             Assert.AreEqual("?42=The%20Answer%20to%20the%20Ultimate%20Question%20of%20Life%2C%20the%20Universe%2C%20and%20Everything", uri.OriginalString);
 
@@ -625,7 +624,7 @@ namespace Testing.Rfc6570
         public void TestSimpleExpansionNumericKeyCollectionVariable()
         {
             string template = "{1337}";
-            UriTemplate uriTemplate = new UriTemplate(template);
+            global::UriTemplate.Core.UriTemplate uriTemplate = new global::UriTemplate.Core.UriTemplate(template);
             Uri uri = uriTemplate.BindByName(Variables4);
             Assert.AreEqual("leet,as,it,can,be", uri.OriginalString);
 
@@ -644,7 +643,7 @@ namespace Testing.Rfc6570
         public void TestCompoundQueryExpansionNumericKeyCollectionVariable()
         {
             string template = "{?1337*}";
-            UriTemplate uriTemplate = new UriTemplate(template);
+            global::UriTemplate.Core.UriTemplate uriTemplate = new global::UriTemplate.Core.UriTemplate(template);
             Uri uri = uriTemplate.BindByName(Variables4);
             Assert.AreEqual("?1337=leet&1337=as&1337=it&1337=can&1337=be", uri.OriginalString);
 
@@ -663,7 +662,7 @@ namespace Testing.Rfc6570
         public void TestCompoundQueryExpansionNumericKeyMapVariable()
         {
             string template = "{?german*}";
-            UriTemplate uriTemplate = new UriTemplate(template);
+            global::UriTemplate.Core.UriTemplate uriTemplate = new global::UriTemplate.Core.UriTemplate(template);
             Uri uri = uriTemplate.BindByName(Variables4);
             string[] allowed =
                 {

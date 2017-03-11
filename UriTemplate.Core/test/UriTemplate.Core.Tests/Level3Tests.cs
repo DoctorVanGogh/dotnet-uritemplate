@@ -1,16 +1,12 @@
 ﻿// Copyright (c) Tunnel Vision Laboratories, LLC. All Rights Reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
+using System;
+using System.Collections.Generic;
 using NUnit.Framework;
 
-namespace Testing.Rfc6570
+namespace UriTemplate.Core.Tests
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using TunnelVisionLabs.Net;
-
     [TestFixture]
     public class Level3Tests
     {
@@ -42,7 +38,7 @@ namespace Testing.Rfc6570
         public void TestSimpleExpansionMultipleVariablesInQuery()
         {
             string template = "map?{x,y}";
-            UriTemplate uriTemplate = new UriTemplate(template);
+            global::UriTemplate.Core.UriTemplate uriTemplate = new global::UriTemplate.Core.UriTemplate(template);
             Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("map?1024,768", uri.OriginalString);
 
@@ -63,7 +59,7 @@ namespace Testing.Rfc6570
         public void TestSimpleExpansionMultipleVariables()
         {
             string template = "{x,hello,y}";
-            UriTemplate uriTemplate = new UriTemplate(template);
+            global::UriTemplate.Core.UriTemplate uriTemplate = new global::UriTemplate.Core.UriTemplate(template);
             Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("1024,Hello%20World%21,768", uri.OriginalString);
 
@@ -86,7 +82,7 @@ namespace Testing.Rfc6570
         public void TestReservedExpansionMultipleVariables()
         {
             string template = "{+x,hello,y}";
-            UriTemplate uriTemplate = new UriTemplate(template);
+            global::UriTemplate.Core.UriTemplate uriTemplate = new global::UriTemplate.Core.UriTemplate(template);
             Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("1024,Hello%20World!,768", uri.OriginalString);
 
@@ -109,7 +105,7 @@ namespace Testing.Rfc6570
         public void TestReservedExpansionMultipleVariablesWithSlash()
         {
             string template = "{+path,x}/here";
-            UriTemplate uriTemplate = new UriTemplate(template);
+            global::UriTemplate.Core.UriTemplate uriTemplate = new global::UriTemplate.Core.UriTemplate(template);
             Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("/foo/bar,1024/here", uri.OriginalString);
 
@@ -130,7 +126,7 @@ namespace Testing.Rfc6570
         public void TestFragmentExpansionMultipleVariables()
         {
             string template = "{#x,hello,y}";
-            UriTemplate uriTemplate = new UriTemplate(template);
+            global::UriTemplate.Core.UriTemplate uriTemplate = new global::UriTemplate.Core.UriTemplate(template);
             Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("#1024,Hello%20World!,768", uri.OriginalString);
 
@@ -153,7 +149,7 @@ namespace Testing.Rfc6570
         public void TestFragmentExpansionMultipleVariablesAndLiteral()
         {
             string template = "{#path,x}/here";
-            UriTemplate uriTemplate = new UriTemplate(template);
+            global::UriTemplate.Core.UriTemplate uriTemplate = new global::UriTemplate.Core.UriTemplate(template);
             Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("#/foo/bar,1024/here", uri.OriginalString);
 
@@ -174,7 +170,7 @@ namespace Testing.Rfc6570
         public void TestLabelExpansionMultipleVariables()
         {
             string template = "X{.x,y}";
-            UriTemplate uriTemplate = new UriTemplate(template);
+            global::UriTemplate.Core.UriTemplate uriTemplate = new global::UriTemplate.Core.UriTemplate(template);
             Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("X.1024.768", uri.OriginalString);
 
@@ -195,7 +191,7 @@ namespace Testing.Rfc6570
         public void TestPathSegmentExpansion()
         {
             string template = "{/var}";
-            UriTemplate uriTemplate = new UriTemplate(template);
+            global::UriTemplate.Core.UriTemplate uriTemplate = new global::UriTemplate.Core.UriTemplate(template);
             Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("/value", uri.OriginalString);
 
@@ -214,7 +210,7 @@ namespace Testing.Rfc6570
         public void TestPathSegmentExpansionMultipleVariables()
         {
             string template = "{/var,x}/here";
-            UriTemplate uriTemplate = new UriTemplate(template);
+            global::UriTemplate.Core.UriTemplate uriTemplate = new global::UriTemplate.Core.UriTemplate(template);
             Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("/value/1024/here", uri.OriginalString);
 
@@ -235,7 +231,7 @@ namespace Testing.Rfc6570
         public void TestPathParameterExpansionMultipleVariables()
         {
             string template = "{;x,y}";
-            UriTemplate uriTemplate = new UriTemplate(template);
+            global::UriTemplate.Core.UriTemplate uriTemplate = new global::UriTemplate.Core.UriTemplate(template);
             Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual(";x=1024;y=768", uri.OriginalString);
 
@@ -256,7 +252,7 @@ namespace Testing.Rfc6570
         public void TestPathParameterExpansionEmptyValue()
         {
             string template = "{;x,y,empty}";
-            UriTemplate uriTemplate = new UriTemplate(template);
+            global::UriTemplate.Core.UriTemplate uriTemplate = new global::UriTemplate.Core.UriTemplate(template);
             Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual(";x=1024;y=768;empty", uri.OriginalString);
 
@@ -279,7 +275,7 @@ namespace Testing.Rfc6570
         public void TestQueryExpansionMultipleVariables()
         {
             string template = "{?x,y}";
-            UriTemplate uriTemplate = new UriTemplate(template);
+            global::UriTemplate.Core.UriTemplate uriTemplate = new global::UriTemplate.Core.UriTemplate(template);
             Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("?x=1024&y=768", uri.OriginalString);
 
@@ -300,7 +296,7 @@ namespace Testing.Rfc6570
         public void TestQueryExpansionEmptyValue()
         {
             string template = "{?x,y,empty}";
-            UriTemplate uriTemplate = new UriTemplate(template);
+            global::UriTemplate.Core.UriTemplate uriTemplate = new global::UriTemplate.Core.UriTemplate(template);
             Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("?x=1024&y=768&empty=", uri.OriginalString);
 
@@ -323,7 +319,7 @@ namespace Testing.Rfc6570
         public void TestQueryContinuationExpansion()
         {
             string template = "?fixed=yes{&x}";
-            UriTemplate uriTemplate = new UriTemplate(template);
+            global::UriTemplate.Core.UriTemplate uriTemplate = new global::UriTemplate.Core.UriTemplate(template);
             Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("?fixed=yes&x=1024", uri.OriginalString);
 
@@ -342,7 +338,7 @@ namespace Testing.Rfc6570
         public void TestQueryContinuationExpansionMultipleVariables()
         {
             string template = "{&x,y,empty}";
-            UriTemplate uriTemplate = new UriTemplate(template);
+            global::UriTemplate.Core.UriTemplate uriTemplate = new global::UriTemplate.Core.UriTemplate(template);
             Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("&x=1024&y=768&empty=", uri.OriginalString);
 

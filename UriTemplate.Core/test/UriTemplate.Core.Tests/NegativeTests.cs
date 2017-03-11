@@ -1,15 +1,13 @@
 ﻿// Copyright (c) Tunnel Vision Laboratories, LLC. All Rights Reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
+using System;
+using System.Collections.Generic;
 using NUnit.Framework;
 using Shouldly;
 
-namespace Testing.Rfc6570
+namespace UriTemplate.Core.Tests
 {
-    using System;
-    using System.Collections.Generic;
-    using TunnelVisionLabs.Net;
-
     [TestFixture]
     public class NegativeTests
     {
@@ -40,7 +38,7 @@ namespace Testing.Rfc6570
         public void TestUnclosedTemplate()
         {
             string template = "{/id*";
-            Should.Throw<FormatException>(() => new UriTemplate(template));
+            Should.Throw<FormatException>(() => new global::UriTemplate.Core.UriTemplate(template));
         }
 
         [Test]
@@ -48,7 +46,7 @@ namespace Testing.Rfc6570
         public void TestUnopenedTemplate()
         {
             string template = "/id*}";
-            Should.Throw<FormatException>(() => new UriTemplate(template));
+            Should.Throw<FormatException>(() => new global::UriTemplate.Core.UriTemplate(template));
         }
 
         [Test]
@@ -56,7 +54,7 @@ namespace Testing.Rfc6570
         public void TestTwoOperatorsTemplate()
         {
             string template = "{/?id}";
-            Should.Throw<FormatException>(() => new UriTemplate(template));
+            Should.Throw<FormatException>(() => new global::UriTemplate.Core.UriTemplate(template));
         }
 
         [Test]
@@ -64,7 +62,7 @@ namespace Testing.Rfc6570
         public void TestNonIntegralPrefixTemplate()
         {
             string template = "{var:prefix}";
-            Should.Throw<FormatException>(() => new UriTemplate(template));
+            Should.Throw<FormatException>(() => new global::UriTemplate.Core.UriTemplate(template));
         }
 
         [Test]
@@ -72,7 +70,7 @@ namespace Testing.Rfc6570
         public void TestCompositePrefixTemplate()
         {
             string template = "{hello:2*}";
-            Should.Throw<FormatException>(() => new UriTemplate(template));
+            Should.Throw<FormatException>(() => new global::UriTemplate.Core.UriTemplate(template));
         }
 
         [Test]
@@ -80,7 +78,7 @@ namespace Testing.Rfc6570
         public void TestDuplicateOperatorTemplate()
         {
             string template = "{??hello}";
-            Should.Throw<FormatException>(() => new UriTemplate(template));
+            Should.Throw<FormatException>(() => new global::UriTemplate.Core.UriTemplate(template));
         }
 
         [Test]
@@ -88,7 +86,7 @@ namespace Testing.Rfc6570
         public void TestSpaceInExpressionTemplate()
         {
             string template = "{with space}";
-            Should.Throw<FormatException>(() => new UriTemplate(template));
+            Should.Throw<FormatException>(() => new global::UriTemplate.Core.UriTemplate(template));
         }
 
         [Test]
@@ -96,7 +94,7 @@ namespace Testing.Rfc6570
         public void TestSpaceAtStartOfExpressionTemplate()
         {
             string template = "{ leading_space}";
-            Should.Throw<FormatException>(() => new UriTemplate(template));
+            Should.Throw<FormatException>(() => new global::UriTemplate.Core.UriTemplate(template));
         }
 
         [Test]
@@ -104,7 +102,7 @@ namespace Testing.Rfc6570
         public void TestSpaceAtEndOfExpressionTemplate()
         {
             string template = "{trailing_space }";
-            Should.Throw<FormatException>(() => new UriTemplate(template));
+            Should.Throw<FormatException>(() => new global::UriTemplate.Core.UriTemplate(template));
         }
 
         [Test]
@@ -112,7 +110,7 @@ namespace Testing.Rfc6570
         public void TestEqualsOperatorTemplate()
         {
             string template = "{=path}";
-            Should.Throw<NotSupportedException>(() => new UriTemplate(template));
+            Should.Throw<NotSupportedException>(() => new global::UriTemplate.Core.UriTemplate(template));
         }
 
         [Test]
@@ -120,7 +118,7 @@ namespace Testing.Rfc6570
         public void TestDollarOperatorTemplate()
         {
             string template = "{$var}";
-            Should.Throw<FormatException>(() => new UriTemplate(template));
+            Should.Throw<FormatException>(() => new global::UriTemplate.Core.UriTemplate(template));
         }
 
         [Test]
@@ -128,7 +126,7 @@ namespace Testing.Rfc6570
         public void TestPipeOperatorTemplate()
         {
             string template = "{|var*}";
-            Should.Throw<NotSupportedException>(() => new UriTemplate(template));
+            Should.Throw<NotSupportedException>(() => new global::UriTemplate.Core.UriTemplate(template));
         }
 
         [Test]
@@ -136,7 +134,7 @@ namespace Testing.Rfc6570
         public void TestReverseOperatorTemplate()
         {
             string template = "{*keys?}";
-            Should.Throw<FormatException>(() => new UriTemplate(template));
+            Should.Throw<FormatException>(() => new global::UriTemplate.Core.UriTemplate(template));
         }
 
         [Test]
@@ -144,7 +142,7 @@ namespace Testing.Rfc6570
         public void TestInvalidQueryTemplate()
         {
             string template = "{?empty=default,var}";
-            Should.Throw<FormatException>(() => new UriTemplate(template));
+            Should.Throw<FormatException>(() => new global::UriTemplate.Core.UriTemplate(template));
         }
 
         [Test]
@@ -152,7 +150,7 @@ namespace Testing.Rfc6570
         public void TestInvalidAlternativesTemplate()
         {
             string template = "{var}{-prefix|/-/|var}";
-            Should.Throw<FormatException>(() => new UriTemplate(template));
+            Should.Throw<FormatException>(() => new global::UriTemplate.Core.UriTemplate(template));
         }
 
         [Test]
@@ -160,7 +158,7 @@ namespace Testing.Rfc6570
         public void TestInvalidPrefixTemplate()
         {
             string template = "?q={searchTerms}&amp;c={example:color?}";
-            Should.Throw<FormatException>(() => new UriTemplate(template));
+            Should.Throw<FormatException>(() => new global::UriTemplate.Core.UriTemplate(template));
         }
 
         [Test]
@@ -168,7 +166,7 @@ namespace Testing.Rfc6570
         public void TestAlternativesQueryTemplate()
         {
             string template = "x{?empty|foo=none}";
-            Should.Throw<FormatException>(() => new UriTemplate(template));
+            Should.Throw<FormatException>(() => new global::UriTemplate.Core.UriTemplate(template));
         }
 
         [Test]
@@ -176,7 +174,7 @@ namespace Testing.Rfc6570
         public void TestCompoundFragmentTemplate()
         {
             string template = "/h{#hello+}";
-            Should.Throw<FormatException>(() => new UriTemplate(template));
+            Should.Throw<FormatException>(() => new global::UriTemplate.Core.UriTemplate(template));
         }
 
         [Test]
@@ -184,7 +182,7 @@ namespace Testing.Rfc6570
         public void TestInvalidFragmentTemplate()
         {
             string template = "/h#{hello+}";
-            Should.Throw<FormatException>(() => new UriTemplate(template));
+            Should.Throw<FormatException>(() => new global::UriTemplate.Core.UriTemplate(template));
         }
 
         [Test]
@@ -192,7 +190,7 @@ namespace Testing.Rfc6570
         public void TestPrefixAssociativeMapTemplate()
         {
             string template = "{keys:1}";
-            UriTemplate uriTemplate = new UriTemplate(template);
+            global::UriTemplate.Core.UriTemplate uriTemplate = new global::UriTemplate.Core.UriTemplate(template);
             Should.Throw<InvalidOperationException>(() => uriTemplate.BindByName(Variables));
         }
 
@@ -201,7 +199,7 @@ namespace Testing.Rfc6570
         public void TestPlusOperatorAssociativeMapTemplate()
         {
             string template = "{+keys:1}";
-            UriTemplate uriTemplate = new UriTemplate(template);
+            global::UriTemplate.Core.UriTemplate uriTemplate = new global::UriTemplate.Core.UriTemplate(template);
             Should.Throw<InvalidOperationException>(() => uriTemplate.BindByName(Variables));
         }
 
@@ -210,7 +208,7 @@ namespace Testing.Rfc6570
         public void TestCompountPathParameterPrefixAssociativeMapTemplate()
         {
             string template = "{;keys:1*}";
-            Should.Throw<FormatException>(() => new UriTemplate(template));
+            Should.Throw<FormatException>(() => new global::UriTemplate.Core.UriTemplate(template));
         }
 
         [Test]
@@ -218,7 +216,7 @@ namespace Testing.Rfc6570
         public void TestInvalidPipeOperatorTemplate()
         {
             string template = "?{-join|&|var,list}";
-            Should.Throw<FormatException>(() => new UriTemplate(template));
+            Should.Throw<FormatException>(() => new global::UriTemplate.Core.UriTemplate(template));
         }
 
         [Test]
@@ -226,7 +224,7 @@ namespace Testing.Rfc6570
         public void TestInvalidTildeOperatorTemplate()
         {
             string template = "/people/{~thing}";
-            Should.Throw<FormatException>(() => new UriTemplate(template));
+            Should.Throw<FormatException>(() => new global::UriTemplate.Core.UriTemplate(template));
         }
 
         [Test]
@@ -234,7 +232,7 @@ namespace Testing.Rfc6570
         public void TestHypenatedVariableNameTemplate()
         {
             string template = "/{default-graph-uri}";
-            Should.Throw<FormatException>(() => new UriTemplate(template));
+            Should.Throw<FormatException>(() => new global::UriTemplate.Core.UriTemplate(template));
         }
 
         [Test]
@@ -242,7 +240,7 @@ namespace Testing.Rfc6570
         public void TestHypenatedVariableName2Template()
         {
             string template = "/sparql{?query,default-graph-uri}";
-            Should.Throw<FormatException>(() => new UriTemplate(template));
+            Should.Throw<FormatException>(() => new global::UriTemplate.Core.UriTemplate(template));
         }
 
         [Test]
@@ -250,7 +248,7 @@ namespace Testing.Rfc6570
         public void TestMismatchedBracesTemplate()
         {
             string template = "/sparql{?query){&default-graph-uri*}";
-            Should.Throw<FormatException>(() => new UriTemplate(template));
+            Should.Throw<FormatException>(() => new global::UriTemplate.Core.UriTemplate(template));
         }
 
         [Test]
@@ -258,7 +256,7 @@ namespace Testing.Rfc6570
         public void TestSpaceAfterCommaTemplate()
         {
             string template = "/resolution{?x, y}";
-            Should.Throw<FormatException>(() => new UriTemplate(template));
+            Should.Throw<FormatException>(() => new global::UriTemplate.Core.UriTemplate(template));
         }
     }
 }

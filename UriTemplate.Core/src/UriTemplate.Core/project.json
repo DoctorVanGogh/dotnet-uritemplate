@@ -18,7 +18,7 @@
         "NETStandard.Library": "1.6.1"
       }
     },
-    "net461": {
+    "net45": {
       "dependencies": {
        
       }

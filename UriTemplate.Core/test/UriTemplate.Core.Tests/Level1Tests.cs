@@ -1,14 +1,12 @@
 ﻿// Copyright (c) Tunnel Vision Laboratories, LLC. All Rights Reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
+using System;
+using System.Collections.Generic;
 using NUnit.Framework;
 
-namespace Testing.Rfc6570
+namespace UriTemplate.Core.Tests
 {
-    using System;
-    using System.Collections.Generic;
-    using TunnelVisionLabs.Net;
-
     [TestFixture]
     public class Level1Tests
     {
@@ -32,7 +30,7 @@ namespace Testing.Rfc6570
         public void TestEmptyTemplate()
         {
             string template = string.Empty;
-            UriTemplate uriTemplate = new UriTemplate(template);
+            global::UriTemplate.Core.UriTemplate uriTemplate = new global::UriTemplate.Core.UriTemplate(template);
             Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual(string.Empty, uri.OriginalString);
 
@@ -47,7 +45,7 @@ namespace Testing.Rfc6570
         public void TestSimpleExpansion()
         {
             string template = "{var}";
-            UriTemplate uriTemplate = new UriTemplate(template);
+            global::UriTemplate.Core.UriTemplate uriTemplate = new global::UriTemplate.Core.UriTemplate(template);
             Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("value", uri.OriginalString);
 
@@ -66,7 +64,7 @@ namespace Testing.Rfc6570
         public void TestSimpleExpansionEscaping()
         {
             string template = "{hello}";
-            UriTemplate uriTemplate = new UriTemplate(template);
+            global::UriTemplate.Core.UriTemplate uriTemplate = new global::UriTemplate.Core.UriTemplate(template);
             Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("Hello%20World%21", uri.OriginalString);
 

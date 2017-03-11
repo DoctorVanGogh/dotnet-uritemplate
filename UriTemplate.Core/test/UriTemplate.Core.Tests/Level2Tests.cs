@@ -1,14 +1,12 @@
 ﻿// Copyright (c) Tunnel Vision Laboratories, LLC. All Rights Reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
+using System;
+using System.Collections.Generic;
 using NUnit.Framework;
-using TunnelVisionLabs.Net;
 
-namespace Testing.Rfc6570
+namespace UriTemplate.Core.Tests
 {
-    using System;
-    using System.Collections.Generic;
-
     [TestFixture]
     public class Level2Tests
     {
@@ -34,7 +32,7 @@ namespace Testing.Rfc6570
         public void TestReservedExpansion()
         {
             string template = "{+var}";
-            UriTemplate uriTemplate = new UriTemplate(template);
+            global::UriTemplate.Core.UriTemplate uriTemplate = new global::UriTemplate.Core.UriTemplate(template);
             Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("value", uri.OriginalString);
 
@@ -53,7 +51,7 @@ namespace Testing.Rfc6570
         public void TestReservedExpansionEscaping()
         {
             string template = "{+hello}";
-            UriTemplate uriTemplate = new UriTemplate(template);
+            global::UriTemplate.Core.UriTemplate uriTemplate = new global::UriTemplate.Core.UriTemplate(template);
             Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("Hello%20World!", uri.OriginalString);
 
@@ -72,7 +70,7 @@ namespace Testing.Rfc6570
         public void TestReservedExpansionReservedCharacters()
         {
             string template = "{+path}/here";
-            UriTemplate uriTemplate = new UriTemplate(template);
+            global::UriTemplate.Core.UriTemplate uriTemplate = new global::UriTemplate.Core.UriTemplate(template);
             Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("/foo/bar/here", uri.OriginalString);
 
@@ -91,7 +89,7 @@ namespace Testing.Rfc6570
         public void TestReservedExpansionReservedCharactersInQuery()
         {
             string template = "here?ref={+path}";
-            UriTemplate uriTemplate = new UriTemplate(template);
+            global::UriTemplate.Core.UriTemplate uriTemplate = new global::UriTemplate.Core.UriTemplate(template);
             Uri uri = uriTemplate.BindByName(Variables);
             Assert.AreEqual("here?ref=/foo/bar", uri.OriginalString);
 

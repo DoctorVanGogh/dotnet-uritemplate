@@ -1,11 +1,11 @@
 ﻿// Copyright (c) Tunnel Vision Laboratories, LLC. All Rights Reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
-namespace TunnelVisionLabs.Net
-{
-    using System;
-    using System.Text.RegularExpressions;
+using System;
+using System.Text.RegularExpressions;
 
+namespace UriTemplate.Core
+{
     /// <summary>
     /// Represents a variable reference within a <see cref="UriTemplate"/> expression.
     /// </summary>
