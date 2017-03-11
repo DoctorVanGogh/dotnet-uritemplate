@@ -1,5 +1,5 @@
 # UriTemplate.Core
-This is a fork of a  .NET library supporting RFC 6570 URI Templates (Level 4). It is compiled for .NET 4.5 and .NETStandard 1.6.
+This is a  .NET library supporting RFC 6570 URI Templates (Level 4). It is compiled for .NET 4.5 and .NETStandard 1.6.
 You can download it from nuget https://www.nuget.org/packages/UriTemplate.Core.
 ## Usage
 Matching uri templates with this library is pretty straight-forward:
